@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-
+import ThoughtForm from '../components/ThoughtForm';
 import ThoughtList from '../components/ThoughtList';
 import FriendList from '../components/FriendList';
 
@@ -12,7 +12,9 @@ import Auth from '../utils/auth';
 
 const Profile = (props) => {
   const { username: userParam } = useParams();
+  
   const [addFriend] = useMutation(ADD_FRIEND);
+
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
@@ -77,6 +79,7 @@ const Profile = (props) => {
           />
         </div>
       </div>
+      <div className="mb-3">{!userParam && <ThoughtForm />}</div>
     </div>
   );
 };
